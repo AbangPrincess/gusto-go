@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { CartProvider } from './context/CartContext'
@@ -37,11 +38,30 @@ function GuestOnly() {
   return <Outlet />
 }
 
+const SPLASH_MS = 3000
+const SPLASH_FADE_MS = 500
+
+// Shows the logo for 3 seconds whenever the site is opened, then fades out.
+// The app keeps loading underneath, so the page is ready when the splash leaves.
+function StartupSplash() {
+  const [phase, setPhase] = useState('show') // show → leaving → done
+  useEffect(() => {
+    const leave = setTimeout(() => setPhase('leaving'), SPLASH_MS)
+    const done = setTimeout(() => setPhase('done'), SPLASH_MS + SPLASH_FADE_MS)
+    return () => {
+      clearTimeout(leave)
+      clearTimeout(done)
+    }
+  }, [])
+  return phase === 'done' ? null : <Splash leaving={phase === 'leaving'} />
+}
+
 export default function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
         <ToastProvider>
+          <StartupSplash />
           <ScrollToTop />
           <Routes>
             <Route element={<GuestOnly />}>

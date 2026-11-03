@@ -23,9 +23,28 @@
         }
       } catch (e) {}
     </script>
+    <style>
+      #boot { position: fixed; inset: 0; display: grid; place-items: center; background: #fafaf9; }
+      .dark #boot { background: #0c0a09; }
+      #boot svg { width: 6rem; height: 6rem; filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1)); animation: boot-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+      @media (min-width: 640px) { #boot svg { width: 7rem; height: 7rem; } }
+      @keyframes boot-in { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: none; } }
+      @media (prefers-reduced-motion: reduce) { #boot svg { animation: none; } }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div id="boot">
+        <svg viewBox="0 0 64 64" aria-label="Gusto Go">
+          <circle cx="32" cy="32" r="32" fill="#c2410c" />
+          <g fill="#fff" stroke="#fff" transform="translate(-1 0)">
+            <path d="M41.3 19.7A16 16 0 1 0 46.5 36" fill="none" stroke-width="7" />
+            <path d="M30 32h13" fill="none" stroke-width="6" />
+            <path d="M41 24.5 51 32l-1.2 5-6.7-1.8L41 35z" stroke="none" />
+          </g>
+        </svg>
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -14,10 +14,10 @@ const SLIDES = [
   'buko-pandan-drink',
 ].map(findFood)
 
-const HOLD_MS = 5000 // how long each photo stays
-const FADE_MS = 1600 // crossfade length
+const HOLD_MS = 3500 // how long each photo stays
+const FADE_MS = 900 // crossfade length: quick, with a soft ease in and out
 
-// One full-bleed food photo at a time. Each new photo slowly fades in over the
+// One full-bleed food photo at a time. Each new photo softly fades in over the
 // previous one while drifting into a gentle zoom. Only the photos on screen
 // (previous, current, next) are in the page, so it stays light to load.
 export default function FoodSlideshow() {
@@ -52,15 +52,12 @@ export default function FoodSlideshow() {
             style={{ transitionDuration: `${FADE_MS}ms, ${HOLD_MS + FADE_MS}ms` }}
             // The new photo fades in on top while the previous one stays fully visible underneath,
             // so the picture never dims mid-transition
-            className={`absolute inset-0 size-full object-cover transition-[opacity,scale] ease-in-out ${
+            className={`absolute inset-0 size-full object-cover transition-[opacity,scale] ease-[cubic-bezier(0.45,0,0.55,1)] ${
               role === 'current' ? 'z-10 opacity-100' : role === 'previous' ? 'z-0 opacity-100' : 'z-0 opacity-0'
             } ${role === 'next' ? 'scale-100' : 'scale-[1.06]'}`}
           />
         )
       })}
-      <p className="absolute top-6 left-8 z-20 rounded-full bg-white/85 px-3 py-1 text-xs font-semibold text-stone-800 shadow-sm backdrop-blur">
-        {SLIDES[index].name}
-      </p>
     </div>
   )
 }
