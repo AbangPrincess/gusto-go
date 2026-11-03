@@ -4,8 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="description" content="Gusto Go — order burgers, salads, sides, desserts and Filipino drinks from Sari-Sari Eats, delivered in 15–30 minutes." />
-    <meta name="theme-color" content="#fafaf9" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#fafaf9" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -15,11 +14,12 @@
     <link rel="manifest" href="/manifest.webmanifest" />
     <title>Gusto Go</title>
     <script>
-      // Apply the saved theme before first paint to avoid a flash
+      // Light by default; dark only when the customer turned it on in Settings.
+      // Applied before first paint to avoid a flash.
       try {
-        var t = localStorage.getItem('gusto-theme')
-        if (t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches)) {
+        if (localStorage.getItem('gusto-theme') === 'dark') {
           document.documentElement.classList.add('dark')
+          document.querySelector('meta[name=theme-color]').content = '#0c0a09'
         }
       } catch (e) {}
     </script>

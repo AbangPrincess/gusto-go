@@ -1,26 +1,17 @@
 import { DELIVERY_TIME, RESTAURANT_NAME } from '../data/menu'
+import FoodSlideshow from './FoodSlideshow'
 import Logo from './Logo'
-
-const COLLAGE = [
-  '/images/burgers/classic-cheeseburger-960.webp',
-  '/images/salads/strawberry-salad-960.webp',
-  '/images/desserts/leche-flan-960.webp',
-  '/images/drinks/mango-juice-960.webp',
-]
 
 export default function AuthLayout({ title, subtitle, children }) {
   return (
     <div className="grid min-h-dvh lg:grid-cols-[1.05fr_1fr]">
-      <aside className="relative hidden overflow-hidden bg-stone-900 lg:block">
-        <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-1 opacity-70">
-          {COLLAGE.map((src) => (
-            <img key={src} src={src} alt="" decoding="async" className="size-full bg-stone-800 object-cover" />
-          ))}
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/60 to-stone-950/10" />
-        <div className="relative flex h-full flex-col justify-end p-12 text-white">
-          <p className="text-sm font-semibold tracking-wide text-brand-300 uppercase">{RESTAURANT_NAME}</p>
-          <h2 className="mt-2 max-w-md text-4xl leading-tight font-bold">
+      <aside className="relative hidden overflow-hidden lg:block">
+        <FoodSlideshow />
+        {/* Soft shade only behind the text, so the photo stays bright */}
+        <div className="absolute inset-x-0 bottom-0 z-20 h-1/2 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+        <div className="relative z-30 flex h-full flex-col justify-end p-12 text-white">
+          <p className="text-sm font-semibold tracking-wide text-brand-200 uppercase">{RESTAURANT_NAME}</p>
+          <h2 className="mt-2 max-w-md text-4xl leading-tight font-bold [text-shadow:0_1px_12px_rgb(0_0_0/0.35)]">
             Burgers, salads and Filipino favourites, delivered in {DELIVERY_TIME}.
           </h2>
         </div>

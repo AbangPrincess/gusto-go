@@ -13,6 +13,7 @@ export function ThemeProvider({ children }) {
     setIsDarkMode((current) => {
       const next = !current
       document.documentElement.classList.toggle('dark', next)
+      document.querySelector('meta[name=theme-color]')?.setAttribute('content', next ? '#0c0a09' : '#fafaf9')
       try {
         localStorage.setItem(KEY, next ? 'dark' : 'light')
       } catch {
