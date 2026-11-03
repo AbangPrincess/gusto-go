@@ -1,0 +1,138 @@
+export const RESTAURANT_NAME = 'Sari-Sari Eats'
+export const DELIVERY_FEE = 30
+export const DELIVERY_TIME = '15–30 min'
+
+export const CATEGORIES = [
+  { id: 'burgers', label: 'Burgers' },
+  { id: 'salads', label: 'Salads' },
+  { id: 'sides', label: 'Sides' },
+  { id: 'desserts', label: 'Desserts' },
+  { id: 'drinks', label: 'Drinks' },
+]
+
+const slug = (text) => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+
+// Photos live in public/images/<category>/<id>-480.webp and -960.webp (see FoodImage)
+const food = (category, name, description, price, addons) => ({
+  id: slug(name),
+  category,
+  name,
+  description,
+  image: `/images/${category}/${slug(name)}`,
+  price,
+  addons: addons.map(([addonName, addonPrice]) => ({ name: addonName, price: addonPrice })),
+})
+
+export const MENU = [
+  // burgers
+  food('burgers', 'Classic Cheeseburger',
+    'A juicy beef patty topped with melted cheese, served in a soft bun with lettuce, tomato, pickles, onions, and condiments like ketchup, mustard, and mayonnaise.',
+    60,
+    [['Extra Cheese', 10], ['Extra Patty', 20], ['Lettuce', 2]]),
+  food('burgers', 'Breakfast Burger',
+    'A beef patty topped with a fried egg, bacon, cheese, and hash browns, served in a soft bun with ketchup and mayo.',
+    60,
+    [['Extra Bacon', 10], ['Extra Patty', 20], ['Lettuce', 1]]),
+  food('burgers', 'Chicken Burger',
+    'A grilled or fried chicken breast, served in a bun with lettuce, tomato, pickles, and mayo.',
+    60,
+    [['Extra Chicken', 30], ['Pickles', 1], ['Lettuce', 1]]),
+  food('burgers', 'Korean BBQ Burger',
+    'A beef patty glazed with Korean BBQ sauce, topped with kimchi, and served in a bun with lettuce and a spicy mayo.',
+    80,
+    [['Extra kimchi', 30], ['Patty', 20], ['Lettuce', 1]]),
+  food('burgers', 'Salmon Burger',
+    'A grilled salmon patty served in a bun with lettuce, tomato, red onion, and a dill sauce.',
+    60,
+    [['Extra Tomato', 3], ['Extra Salmon', 20], ['Lettuce', 1]]),
+
+  // salads
+  food('salads', 'Antipasto Salad',
+    'A mix of cured meats, cheeses, olives, and marinated vegetables, typically served with a light vinaigrette.',
+    50,
+    [['Extra Cheese', 2], ['Extra Meat', 10], ['Extra Olives', 8]]),
+  food('salads', 'Avocado Salad',
+    'Sliced avocado served with mixed greens, cherry tomatoes, red onion, and a lime vinaigrette.',
+    60,
+    [['Extra Tomato', 5], ['Extra Red Onion', 3], ['Peanut Bits', 5]]),
+  food('salads', 'Caesar Salad',
+    'Romaine lettuce tossed with Caesar dressing, croutons, and Parmesan cheese.',
+    60,
+    [['Extra Dressing', 5], ['Extra Cheese', 3], ['Extra Lettuce', 2]]),
+  food('salads', 'Lentil Salad',
+    'Cooked lentils mixed with diced vegetables, herbs, and a tangy vinaigrette.',
+    60,
+    [['Extra Vegetable', 20], ['Extra Herbs', 10], ['Extra Vinaigrette', 10]]),
+  food('salads', 'Strawberry Salad',
+    'Fresh strawberries served with mixed greens, nuts, feta cheese, and a balsamic vinaigrette.',
+    60,
+    [['Extra Cheese', 10], ['Extra Strawberry', 15], ['Extra Nuts', 5]]),
+
+  // sides
+  food('sides', 'Fried Broccoli',
+    'Broccoli florets lightly battered and fried until crispy.',
+    40,
+    [['Extra Butter', 5]]),
+  food('sides', 'Mashed Butternut Squash',
+    'Cooked butternut squash mashed with butter, cream, and spices.',
+    50,
+    [['Extra Spices', 15]]),
+  food('sides', 'Mashed Potatoes',
+    'Boiled potatoes mashed with butter, milk, and salt.',
+    40,
+    [['Extra Milk', 10]]),
+  food('sides', 'Skillet Corn',
+    'Corn kernels sautéed with butter, garlic, and herbs.',
+    60,
+    [['Extra Kernels', 5], ['Extra Herbs', 3]]),
+  food('sides', 'Sweet Potato Fries',
+    'Sweet potatoes cut into fries, seasoned, and baked or fried until crispy.',
+    40,
+    [['Powdered Cheese', 5], ['Spicy BBQ', 5], ['Garlic Powder', 5]]),
+
+  // desserts
+  food('desserts', 'Buko Pie',
+    'A coconut pie made with a creamy filling of young coconut meat and a flaky pastry crust.',
+    50,
+    [['Extra Filling', 5], ['Extra Coconut Meat', 5]]),
+  food('desserts', 'Chocolate Ice Cream',
+    'Creamy ice cream made with rich chocolate, sugar, milk, and cream.',
+    30,
+    [['Extra Chocolate Fillings', 8]]),
+  food('desserts', 'Cookies and Cream Ice Cream',
+    'Vanilla ice cream mixed with crushed chocolate sandwich cookies.',
+    30,
+    [['Extra Cookies', 10]]),
+  food('desserts', 'Leche Flan',
+    'A rich and creamy custard dessert topped with a layer of caramel sauce.',
+    40,
+    [['Extra Caramel Sauce', 10]]),
+  food('desserts', 'Mais con Yelo',
+    'A dessert made with shaved ice, sweet corn kernels, and evaporated milk.',
+    40,
+    [['Extra Sweet Corn', 5], ['Extra Milk', 5], ['Extra Ice', 3]]),
+
+  // drinks
+  food('drinks', 'Buko Juice',
+    'A refreshing drink made from young coconut water, sometimes with coconut meat.',
+    30,
+    [['With Ice', 3]]),
+  food('drinks', 'Buko Pandan Drink',
+    'A sweet drink made with young coconut, pandan-flavored jelly, and sweetened cream or milk.',
+    30,
+    [['With Ice', 3]]),
+  food('drinks', 'Guinumis Drink',
+    'A beverage made with sago pearls, coconut milk, pinipig (toasted rice), and sweetened with sugar.',
+    30,
+    [['With Ice', 3]]),
+  food('drinks', 'Mango Juice',
+    'Fresh mangoes blended with water and sugar to create a refreshing juice.',
+    30,
+    [['With Ice', 3]]),
+  food('drinks', 'Melon Juice',
+    'Freshly grated cantaloupe mixed with water and sugar, served cold.',
+    30,
+    [['With Ice', 3]]),
+]
+
+export const findFood = (id) => MENU.find((item) => item.id === id)
